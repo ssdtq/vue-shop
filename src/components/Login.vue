@@ -72,8 +72,8 @@ export default {
         this.$http.post('login', this.loginForm).then((result) => {
           // console.log(res.data)
           const res = result.data
-          if (res.meta.status !== 200) return this.$Message.error('登录失败!')
-          this.$Message.success('登录成功!')
+          if (res.meta.status !== 200) return this.$message.error('登录失败!')
+          this.$message.success('登录成功!')
           /*
             1.将登录成功之后的 token 保存到客户端的 sessionStorage 中
               1.1 项目中除了登陆之外的其它 api 接口，必须在登录之后才能访问
@@ -143,7 +143,7 @@ export default {
     .btns {
       display: flex;
       justify-content: flex-end;
-    }
+      }
     }
   }
 }
