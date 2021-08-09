@@ -2,7 +2,7 @@
   <div>
     <!-- 面包屑导航区 -->
     <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/welcome' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>商品管理</el-breadcrumb-item>
       <el-breadcrumb-item>商品列表</el-breadcrumb-item>
     </el-breadcrumb>
@@ -243,7 +243,7 @@ export default {
       if (res.meta.status !== 200) {
         return this.$message.error('获取商品分类数据列表失败')
       }
-      console.log(res.data.result)
+      // console.log(res.data.result)
       // 把数据列表，赋值给catelist
       this.cateList = res.data.result
       // 为总数居条数赋值
@@ -359,13 +359,15 @@ export default {
     },
     // 点击删除按钮，显示对话框
     async closeCategoriesCon(id) {
-      const confirmResult = await this
-        .$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+      const confirmResult = await this.$confirm(
+        '此操作将永久删除该文件, 是否继续?',
+        '提示',
+        {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
-        })
-        .catch(err => err)
+        }
+      ).catch(err => err)
 
       if (confirmResult !== 'confirm') {
         return this.$message.info('已取消删除')
@@ -387,4 +389,7 @@ export default {
 // .treeTable {
 //   margin-top: 15px;
 // }
+.el-cascader {
+  width: 100%;
+}
 </style>
