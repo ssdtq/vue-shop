@@ -302,8 +302,8 @@ export default {
     // 获取参数的列表数据
     async getParamsData() {
       // 判断是否为三级id
-      if(this.cateListProps.length !== 3){
-        this.manyTableData = [],
+      if (this.cateListProps.length !== 3) {
+        this.manyTableData = []
         this.onlyTableData = []
       }
       // 根据所选分类的id，和当前所处的面板，获取对应的参数
@@ -394,11 +394,11 @@ export default {
       })
     },
     // 点击按钮 展示修改对话框
-    async showEditDialog(cat_id, attr_id) {
+    async showEditDialog(catId, attrId) {
       this.editorDialogVisible = true
       // 根据 ID 查询参数
       const { data: res } = await this.$http.get(
-        `categories/${cat_id}/attributes/${attr_id}`,
+        `categories/${catId}/attributes/${attrId}`,
         {
           params: {
             attr_sel: this.activeName
@@ -412,7 +412,7 @@ export default {
       this.editorForm = res.data
     },
     // 点击删除按钮，删除所选属性
-    async removeDialog(cat_id, attr_id) {
+    async removeDialog(catId, attrId) {
       const confirmResult = await this.$confirm(
         '此操作将永久删除该文件, 是否继续?',
         '提示',
@@ -427,7 +427,7 @@ export default {
         return this.$message.warning('已取消删除')
       }
       const { data: res } = await this.$http.delete(
-        `categories/${cat_id}/attributes/${attr_id}`
+        `categories/${catId}/attributes/${attrId}`
       )
       if (res.meta.status !== 200) {
         return this.$message.error('删除数据失败')
@@ -447,9 +447,8 @@ export default {
       row.attr_vals.push(row.inputValue.trim())
       row.inputValue = ''
       row.inputVisible = false
-      
+
       this.saveAttrVals(row)
-      
     },
     // 点击按钮展示文本输入框
     showInput(row) {
@@ -468,17 +467,20 @@ export default {
     // 抽离编辑提交参数 内容
     async saveAttrVals(row) {
       // 发起请求，保存到后端
-      const { data: res } = await this.$http.put(`categories/${row.cat_id}/attributes/${row.attr_id}`, {
-        attr_name: row.attr_name,
-        attr_sel: row.attr_sel, 
-        attr_vals: row.attr_vals.join(' ')
-      })
+      const { data: res } = await this.$http.put(
+        `categories/${row.cat_id}/attributes/${row.attr_id}`,
+        {
+          attr_name: row.attr_name,
+          attr_sel: row.attr_sel,
+          attr_vals: row.attr_vals.join(' ')
+        }
+      )
 
-      if( res.meta.status !== 200 ) {
+      if (res.meta.status !== 200) {
         return this.$message.error('修改参数项失败')
       }
       this.$message.success('修改参数项成功')
-    },
+    }
   },
   computed: {
     // 如果按钮需要被禁用，则返回true，否则返回flase
