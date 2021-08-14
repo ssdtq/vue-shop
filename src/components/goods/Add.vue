@@ -122,19 +122,17 @@
             <!-- 富文本编辑器组件 -->
             <quill-editor v-model="addForm.goods_introduce"></quill-editor>
             <!-- 添加商品按钮 -->
-            <el-button type="primary" class="btnAdd" @click="add">添加商品</el-button>
+            <el-button type="primary" class="btnAdd" @click="add"
+              >添加商品</el-button
+            >
           </el-tab-pane>
         </el-tabs>
       </el-form>
     </el-card>
 
     <!-- 图片弹出框 -->
-    <el-dialog
-      title="提示预览"
-      :visible.sync="previewVisible"
-      width="50%"
-    >
-    <img :src="previewPath" alt="" class="previewImg">
+    <el-dialog title="提示预览" :visible.sync="previewVisible" width="50%">
+      <img :src="previewPath" alt="" class="previewImg" />
     </el-dialog>
   </div>
 </template>
@@ -295,11 +293,11 @@ export default {
       console.log(this.addForm)
     },
     // 点击 添加商品 事件
-    add () {
+    add() {
       // console.log(this.addForm)
       // 获取表单数据对数据进行验证 返回一个回调函数是否true、false
       this.$refs.addFormRef.validate(async valid => {
-        if ( !valid ) {
+        if (!valid) {
           return this.$message.error('请填写必要的表单项！')
         }
         // 执行添加的业务逻辑
@@ -309,12 +307,15 @@ export default {
         Form.goods_cat = Form.goods_cat.join(',')
         // 处理动态参数
         this.manyTableData.forEach(item => {
-          const newInfo = {attr_id: item.attr_id, attr_value: item.attr_vals.join(' ')}
+          const newInfo = {
+            attr_id: item.attr_id,
+            attr_value: item.attr_vals.join(' ')
+          }
           this.addForm.attrs.push(newInfo)
         })
         // 处理静态属性
         this.onlyTableData.forEach(item => {
-          const newInfo = {attr_id: item.attr_id, attr_value: item.attr_vals}
+          const newInfo = { attr_id: item.attr_id, attr_value: item.attr_vals }
           this.addForm.attrs.push(newInfo)
         })
         Form.attrs = this.addForm.attrs
